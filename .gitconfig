@@ -1,0 +1,6 @@
+[user]
+	name = ali_abibulla
+	email = aliabibulla7717@gmail.com
+[core]
+	autocrlf = input
+	quotepath = off
