@@ -139,7 +139,7 @@ internal class Triangle {
 		System.out.println(c);*/return a + b + c
     }
 
-    fun S(): Double {
+    fun Area(): Double {
         val a = Math.sqrt((a!!.x - b!!.x) * (a!!.x - b!!.x) + (a!!.y - b!!.y) * (a!!.y - b!!.y))
         val b = Math.sqrt((b!!.x - b!!.x) * (b!!.x - c!!.x) + (b!!.y - c!!.y) * (b!!.y - c!!.y))
         //double c = (A.x-C.x)*(A.x-C.x)+(A.y-C.y)*(A.y-C.y);
