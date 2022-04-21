@@ -104,16 +104,16 @@ internal class Triangle {
     }
 
     fun Perimeter(): Double {
-        val side1 = sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
-        val side2 = sqrt((b.x - c.x) * (b.x - c.x) + (b.y - c.y) * (b.y - c.y))
-        val side3 = sqrt((a.x - c.x) * (a.x - c.x) + (a.y - c.y) * (a.y - c.y))
+        val side1 = sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y))
+        val side2 = sqrt((P2.x - P3.x) * (P2.x - P3.x) + (P2.y - P3.y) * (P2.y - P3.y))
+        val side3 = sqrt((P3.x - P1.x) * (P3.x - P1.x) + (P3.y - P1.y) * (P3.y - P1.y))
         return side1 + side2 + side3
     }
 
     fun Area(): Double {
-        val side1 = sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
-        val side2 = sqrt((b.x - c.x) * (b.x - c.x) + (b.y - c.y) * (b.y - c.y))
-        val side3 = sqrt((a.x - c.x) * (a.x - c.x) + (a.y - c.y) * (a.y - c.y))
+        val side1 = sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y))
+        val side2 = sqrt((P2.x - P3.x) * (P2.x - P3.x) + (P2.y - P3.y) * (P2.y - P3.y))
+        val side3 = sqrt((P3.x - P1.x) * (P3.x - P1.x) + (P3.y - P1.y) * (P3.y - P1.y))
         val semiP = (side1 + side2+ side3)/2
         return sqrt(semiP*(semiP-side1)*(semiP-side2)*(semiP-side3))
     }
