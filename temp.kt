@@ -1,128 +1,102 @@
 package com.example.myapplication
-
 import java.util.*
-import kotlin.math.pow
-import kotlin.math.sqrt
+import kotlin.math.*
 
 internal class Point {
-    var x // абсцисса точки
-            = 0.0
-    var y // ордината точки
-            = 0.0
+    var x = 0.0    // x - value
+    var y = 0.0   // y - value
 
-    // возвращает строку с описанием точки
     override fun toString(): String {
         return "($x;$y)"
     }
 
-    // выводит на экран описание точки
     fun printPoint() {
         print(this.toString())
     }
 
-    // метод перемещает точку на указанный вектор
     fun movePoint(a: Double, b: Double) {
         x += a
         y += b
     }
 
-    // метод изменяет координаты точки на указанные
     fun setPoint(a: Double, b: Double) {
         x = a
         y = b
     }
 
-    // конструктор по умолчанию, создающий точку в начале координат
     constructor() {
-        println("Vvedite ordinatu tochki:")
-        val sc1 = Scanner(System.`in`)
-        if (sc1.hasNextInt()) {
-            x = sc1.nextInt().toDouble()
-        }
-        println("Vvedite abstissu tochki:")
-        val sc2 = Scanner(System.`in`)
-        if (sc2.hasNextInt()) {
-            y = sc2.nextInt().toDouble()
-        }
+        println("Enter x-coordinate:")
+        val scan1 = Scanner(System.`in`)
+        x = scan1.nextInt().toDouble()
+        println("Enter y-coordinate")
+        val scan2 = Scanner(System.`in`)
+        y = scan2.nextInt().toDouble()
     }
 
-    // конструктор, создающий точку с указанными координатами
     constructor(a: Double, b: Double) {
         x = a
         y = b
     }
 
-    // метод вычисляющий расстояние между точками
-    fun length(p: Point): Double {
-        return sqrt((p.x - x).pow(2.0) + (p.y - y).pow(2.0))
+    fun equalsPoint(p_0: Point): Boolean {
+        return x == p_0.x && y == p_0.y
     }
 
-    // метод проверяющий совпадают ли точки
-    fun equalsPoint(p: Point): Boolean {
-        return x == p.x && y == p.y
-    }
-
-    fun collinear(p1: Point?, p2: Point?): Boolean {
-        val distx1 = x - p1!!.x
-        val disty1 = y - p1.y
-        val distx2 = p1.x - p2!!.x
-        val disty2 = p1.y - p2.y
-        val k1 = disty1 / distx1
-        val k2 = disty2 / distx2
-        val c1 = y - k1 * x
-        val c2 = p2.y - k2 * p2.x
-        return if (k1 == k2 && c1 == c2) {
-            println("Kollinearni")
+    fun collinear(p1: Point, p2: Point): Boolean {
+        val slope1 = (p1.y - y)/(p1.x - x)
+        val slope2 = (p2.y - y)/(p2.x - x)
+        return if (slope1 == slope2) {
+            println("Points are Collinear")
             true
         } else {
-            println("Ne kollinearni")
+            println("Points are not collinear")
             false
         }
     }
 }
 
 internal class Triangle {
-    var a: Point? = null
+    var P1: Point? = null
         private set
-    var b: Point? = null
+    var P2: Point? = null
         private set
-    var c: Point? = null
+    var P3: Point? = null
         private set
 
     constructor() {
-        val a = Point()
-        val b = Point()
-        val c = Point()
-        if (!a.collinear(b, c)) {
-            this.a = Point(a.x, a.y)
-            this.b = Point(b.x, b.y)
-            this.c = Point(c.x, c.y)
+        val P1 = Point()
+        val P2 = Point()
+        val P3 = Point()
+        if (!P3.collinear(P1, P2)) {
+            this.P1 = Point(P1.x, P1.y)
+            this.P2 = Point(P2.x, P2.y)
+            this.P3 = Point(P3.x, P3.y)
         } else {
-            println("Tochki, zadannije vami, yavljyajytsa kollinearnimi, treugoljnik postroit nevozmojno")
-            this.a = Point(-1, 0)
-            this.b = Point(0, 1)
-            this.c = Point(1, 1)
+            println("The points are collinear")
+            this.P1 = Point(-1, 0)
+            this.P2 = Point(0, 1)
+            this.P3 = Point(1, 1)
         }
     }
 
     constructor(ax: Double, ay: Double, bx: Double, by: Double, cx: Double, cy: Double) {
-        val a = Point(ax, ay)
-        val b = Point(bx, by)
-        val c = Point(cx, cy)
-        if (!a.collinear(b, c)) {
-            this.a = Point(ax, ay)
-            this.b = Point(bx, by)
-            this.c = Point(cx, cy)
+        val P1 = Point(p1x, p1y)
+        val P2 = Point(p2x, p2y)
+        val P3 = Point(p3x, p3y)
+        if (!P3.collinear(P1, P2)) {
+            this.P1 = Point(p1x, p1y)
+            this.P2 = Point(p2x, p2y)
+            this.P3 = Point(p1x, p1y)
         } else {
-            println("Tochki, zadannije vami, yavljyajytsa kollinearnimi, treugoljnik postroit nevozmojno")
-            this.a = Point(-1, 0)
-            this.b = Point(0, 1)
-            this.c = Point(1, 1)
+            println("The points are collinear")
+            this.P1 = Point(0, 0)
+            this.P2 = Point(2, 2)
+            this.P2 = Point(2, 0)
         }
     }
 
     override fun toString(): String {
-        return "Treygoljnik s koordinatami vershin: A=" + a.toString() + "; B=" + b.toString() + "; C=" + c.toString() + ";"
+        return "Triangle with coordinate-points: P1=" + a.toString() + "; P2=" + b.toString() + "; P3=" + c.toString() + ";"
     }
 
     fun print() {
@@ -130,81 +104,56 @@ internal class Triangle {
     }
 
     fun Perimeter(): Double {
-        val a = Math.sqrt((a!!.x - b!!.x) * (a!!.x - b!!.x) + (a!!.y - b!!.y) * (a!!.y - b!!.y))
-        val b = Math.sqrt((b!!.x - b!!.x) * (b!!.x - c!!.x) + (b!!.y - c!!.y) * (b!!.y - c!!.y))
-        val c = Math.sqrt((a.x - c!!.x) * (a.x - c!!.x) + (a.y - c!!.y) * (a.y - c!!.y))
-        /*System.out.println();
-		System.out.println(a);
-		System.out.println(b);
-		System.out.println(c);*/return a + b + c
+        val side1 = sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
+        val side2 = sqrt((b.x - c.x) * (b.x - c.x) + (b.y - c.y) * (b.y - c.y))
+        val side3 = sqrt((a.x - c.x) * (a.x - c.x) + (a.y - c.y) * (a.y - c.y))
+        return side1 + side2 + side3
     }
 
     fun Area(): Double {
-        val a = Math.sqrt((a!!.x - b!!.x) * (a!!.x - b!!.x) + (a!!.y - b!!.y) * (a!!.y - b!!.y))
-        val b = Math.sqrt((b!!.x - b!!.x) * (b!!.x - c!!.x) + (b!!.y - c!!.y) * (b!!.y - c!!.y))
-        //double c = (A.x-C.x)*(A.x-C.x)+(A.y-C.y)*(A.y-C.y);
-        val h = Math.abs(a * a - b / 2 * b / 2)
-        return h * b / 2
+        val side1 = sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
+        val side2 = sqrt((b.x - c.x) * (b.x - c.x) + (b.y - c.y) * (b.y - c.y))
+        val side3 = sqrt((a.x - c.x) * (a.x - c.x) + (a.y - c.y) * (a.y - c.y))
+        val semiP = (side1 + side2+ side3)/2
+        return sqrt(semiP*(semiP-side1)*(semiP-side2)*(semiP-side3))
     }
 
-    fun setA(x: Double, y: Double) {
-        val p = Point(x, y)
-        if (!p.collinear(b, c)) {
-            a = p
+    fun setP1(x: Double, y: Double) {
+        val p_0 = Point(x, y)
+        if (!p_0.collinear(P2, P3)) {
+            P1 = p_0
         } else {
-            println("Tochku pomenjat neljza, t. k. ona budet kollinearna k drugim vershinam treugolnika")
+            println("Not allowed to change")
         }
     }
 
-    fun setB(x: Double, y: Double) {
-        val p = Point(x, y)
-        if (!p.collinear(a, c)) {
-            b = p
+    fun setP2(x: Double, y: Double) {
+        val p_0 = Point(x, y)
+        if (!p_0.collinear(P1, P3)) {
+            P2 = p_0
         } else {
-            println("Tochku pomenjat neljza, t. k. ona budet kollinearna k drugim vershinam treugolnika")
+            println("Not allowed to change")
         }
     }
 
-    fun setC(x: Double, y: Double) {
-        val p = Point(x, y)
-        if (!p.collinear(a, b)) {
-            c = p
+    fun setP3(x: Double, y: Double) {
+        val p_0 = Point(x, y)
+        if (!p_0.collinear(P1, P2)) {
+            P3 = p_0
         } else {
-            println("Tochku pomenjat neljza, t. k. ona budet kollinearna k drugim vershinam treugolnika")
+            println("Not allowed to change")
         }
     }
 
     fun rotate(deg: Double) {
-        val rad: Double
-        val cos: Double
-        val sin: Double
-        if (deg == 90.0) {
-            cos = 0.0
-            sin = 1.0
-        } else {
-            rad = deg * Math.PI / 180
-            cos = Math.cos(rad)
-            sin = Math.sin(rad)
-        }
-        val newAx = a!!.x * cos - a!!.y * sin
-        val newAy = a!!.x * sin - a!!.y * cos
-        val newBx = b!!.x * cos - b!!.y * sin
-        val newBy = b!!.x * sin - b!!.y * cos
-        val newCx = c!!.x * cos - c!!.y * sin
-        val newCy = c!!.x * sin - c!!.y * cos
-        a!!.x = newAx
-        a!!.y = newAy
-        b!!.x = newBx
-        b!!.y = newBy
-        c!!.x = newCx
-        c!!.y = newCy
-        /*A.x = A.x*Math.cos(rad)-A.y*Math.sin(rad);
-		A.y = A.x*Math.sin(rad)-A.y*Math.cos(rad);
-		B.x = B.x*Math.cos(rad)-B.y*Math.sin(rad);
-		B.y = B.x*Math.sin(rad)-B.y*Math.cos(rad);
-		C.x = C.x*Math.cos(rad)-C.y*Math.sin(rad);
-		C.y = C.x*Math.sin(rad)-C.y*Math.cos(rad);*/
-        //Triangle tr = new Triangle(A,B,C);
-        //return tr;
+        val newP1x = P1.x * cos(deg * Math.PI / 180) - P1.y * sin(deg * Math.PI / 180)
+        val newP1y = P1.x * sin(deg * Math.PI / 180) - P1.y * cos(deg * Math.PI / 180)
+        val newP2x = P2.x * cos(deg * Math.PI / 180) - P2.y * sin(deg * Math.PI / 180)
+        val newP2y = P2.x * sin(deg * Math.PI / 180) - P2.y * cos(deg * Math.PI / 180)
+        val newP3x = P3.x * cos(deg * Math.PI / 180) - P3.y * sin(deg * Math.PI / 180)
+        val newP3y = P3.x * sin(deg * Math.PI / 180) - P3.y * cos(deg * Math.PI / 180)
+        P1 = Point(newP1x, newP1y)
+        P2 = Point(newP2x, newP2y)
+        P3 = Point(newP3x, newP3y)
     }
 }
