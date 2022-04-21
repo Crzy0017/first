@@ -96,7 +96,7 @@ internal class Triangle {
     }
 
     override fun toString(): String {
-        return "Triangle with coordinate-points: P1=" + a.toString() + "; P2=" + b.toString() + "; P3=" + c.toString() + ";"
+        return "Triangle with coordinate-points: P1=" + P1.toString() + "; P2=" + P2.toString() + "; P3=" + P3.toString() + ";"
     }
 
     fun print() {
